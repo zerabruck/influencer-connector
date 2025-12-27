@@ -74,9 +74,9 @@ export default function DiscoveryPage() {
     ...filters,
   });
 
-  const influencers = data?.data || [];
-  const total = data?.meta?.total || 0;
-  const totalPages = Math.ceil(total / 12);
+  const influencers = Array.isArray(data) ? data : [];
+  const total = influencers.length;
+  const totalPages = Math.ceil(total / 12) || 1;
 
   return (
     <div className="space-y-8">

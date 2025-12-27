@@ -31,8 +31,8 @@ export default function MessagesPage() {
   const { data: messagesData, isLoading: messagesLoading } = useMessages(selectedContact?.user?.id || '');
   const sendMessage = useSendMessage();
 
-  const contacts = contactsData?.data || [];
-  const messages = messagesData?.data || [];
+  const contacts = contactsData || [];
+  const messages = messagesData || [];
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -110,8 +110,8 @@ export default function MessagesPage() {
                     }`}
                   >
                     <div className="relative">
-                      <Avatar className="w-10 h-<AvatarImage src={10">
-                        contact.user.avatarUrl} />
+                      <Avatar className="w-10 h-10">
+                        <AvatarImage src={contact.user.avatarUrl} />
                         <AvatarFallback>
                           {getInitials(contact.user.firstName, contact.user.lastName)}
                         </AvatarFallback>

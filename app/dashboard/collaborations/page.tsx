@@ -49,7 +49,7 @@ export default function CollaborationsPage() {
   const approveCollaboration = useApproveCollaboration();
   const rejectCollaboration = useRejectCollaboration();
 
-  const collaborations = collaborationsData?.data || [];
+  const collaborations = collaborationsData || [];
 
   const handleSubmit = async () => {
     if (!selectedCollab) return;
@@ -108,25 +108,25 @@ export default function CollaborationsPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardContent className="pt-6">
-            <div className="text-2xl font-bold">{stats?.total || 0}</div>
+            <div className="text-2xl font-bold">{(stats as any)?.totalCollaborations || 0}</div>
             <p className="text-sm text-gray-500">Total Collaborations</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-blue-600">{stats?.active || 0}</div>
+            <div className="text-2xl font-bold text-blue-600">{(stats as any)?.activeCollaborations || 0}</div>
             <p className="text-sm text-gray-500">In Progress</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-purple-600">{stats?.submitted || 0}</div>
+            <div className="text-2xl font-bold text-purple-600">{(stats as any)?.pendingApplications || 0}</div>
             <p className="text-sm text-gray-500">Pending Review</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-green-600">{stats?.completed || 0}</div>
+            <div className="text-2xl font-bold text-green-600">{(stats as any)?.completedCollaborations || 0}</div>
             <p className="text-sm text-gray-500">Completed</p>
           </CardContent>
         </Card>

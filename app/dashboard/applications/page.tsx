@@ -41,8 +41,8 @@ export default function ApplicationsPage() {
 
   const withdrawApplication = useWithdrawApplication();
 
-  const sentApplications = sentData?.data || [];
-  const receivedApplications = receivedData?.data || [];
+  const sentApplications = sentData || [];
+  const receivedApplications = receivedData || [];
 
   const handleWithdraw = async (id: string) => {
     if (confirm('Are you sure you want to withdraw this application?')) {

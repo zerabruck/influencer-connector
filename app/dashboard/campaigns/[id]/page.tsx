@@ -53,7 +53,7 @@ export default function CampaignDetailPage() {
     );
   }
 
-  const applications = applicationsData?.data || [];
+  const applications = applicationsData || [];
 
   const handleAccept = async (applicationId: string) => {
     try {

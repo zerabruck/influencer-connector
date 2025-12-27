@@ -46,19 +46,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(mapSupabaseUser(session.user));
         
         // Then try to fetch additional data from DB (non-blocking)
-        supabase
-          .from('users')
-          .select('*')
-          .eq('id', session.user.id)
-          .single()
-          .then(({ data }) => {
+        (async () => {
+          try {
+            const { data } = await supabase
+              .from('users')
+              .select('*')
+              .eq('id', session.user.id)
+              .single();
             if (data) {
               setUser(mapSupabaseUser(session.user, data));
             }
-          })
-          .catch(() => {
+          } catch {
             // Ignore DB fetch errors
-          });
+          }
+        })();
       }
       setIsLoading(false);
     });
@@ -72,19 +73,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(mapSupabaseUser(session.user));
         
         // Then try to fetch additional data from DB (non-blocking)
-        supabase
-          .from('users')
-          .select('*')
-          .eq('id', session.user.id)
-          .single()
-          .then(({ data }) => {
+        (async () => {
+          try {
+            const { data } = await supabase
+              .from('users')
+              .select('*')
+              .eq('id', session.user.id)
+              .single();
             if (data) {
               setUser(mapSupabaseUser(session.user, data));
             }
-          })
-          .catch(() => {
-            // Ignore DB fetch errors, we already have basic user data
-          });
+          } catch {
+            // Ignore DB fetch errors
+          }
+        })();
       } else {
         setUser(null);
       }

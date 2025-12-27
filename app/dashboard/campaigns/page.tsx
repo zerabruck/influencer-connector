@@ -58,8 +58,8 @@ export default function CampaignsPage() {
   
   const deleteCampaign = useDeleteCampaign();
 
-  const campaigns = campaignsData?.data || [];
-  const publicData = publicCampaigns?.data || [];
+  const campaigns = campaignsData || [];
+  const publicData = publicCampaigns || [];
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this campaign? This cannot be undone.')) {

@@ -109,7 +109,7 @@ export default function FinancePage() {
     },
     {
       title: 'Withdrawn',
-      value: balance?.withdrawn || 0,
+      value: (balance as any)?.withdrawn || 0,
       icon: CreditCard,
       change: '-3.1%',
       trend: 'down',

@@ -209,12 +209,16 @@ export class DatabaseService {
         .single();
       
       if (profile) {
-        query = query.in('campaign_id', 
-          supabase
-            .from('campaigns')
-            .select('id')
-            .eq('brand_id', profile.id)
-        );
+        // First get campaign IDs for this brand
+        const { data: campaigns } = await supabase
+          .from('campaigns')
+          .select('id')
+          .eq('brand_id', profile.id);
+        
+        const campaignIds = campaigns?.map((c: { id: string }) => c.id) || [];
+        if (campaignIds.length > 0) {
+          query = query.in('campaign_id', campaignIds);
+        }
       }
     }
 
