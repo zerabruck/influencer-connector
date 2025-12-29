@@ -128,16 +128,16 @@ export default function FinancePage() {
   const recentTransactions = transactions?.slice(0, 10) || [];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
         {/* Page Title */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Finance</h1>
-            <p className="text-muted-foreground">Manage your income, transactions, and withdrawals</p>
+            <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Finance</h1>
+            <p className="text-muted-foreground text-sm lg:text-base">Manage your income, transactions, and withdrawals</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <Select value={dateRange} onValueChange={setDateRange}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <Calendar className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Select date range" />
               </SelectTrigger>
@@ -148,7 +148,7 @@ export default function FinancePage() {
                 <SelectItem value="1y">Last year</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="outline">
+            <Button variant="outline" className="w-full sm:w-auto">
               <Download className="h-4 w-4 mr-2" />
               Export
             </Button>
@@ -156,15 +156,15 @@ export default function FinancePage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {stats.map((stat) => (
             <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                <stat.icon className="h-4 w-4 text-muted-foreground" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                <CardTitle className="text-xs sm:text-sm font-medium truncate">{stat.title}</CardTitle>
+                <stat.icon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
+              <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+                <div className="text-lg sm:text-2xl font-bold">
                   {stat.prefix}{stat.value.toLocaleString()}
                 </div>
                 <p className="text-xs text-muted-foreground flex items-center mt-1">
@@ -173,7 +173,7 @@ export default function FinancePage() {
                   <span className={stat.trend === 'up' ? 'text-green-500' : stat.trend === 'down' ? 'text-red-500' : ''}>
                     {stat.change}
                   </span>
-                  {' '}vs last month
+                  <span className="hidden sm:inline"> vs last month</span>
                 </p>
               </CardContent>
             </Card>
@@ -191,25 +191,25 @@ export default function FinancePage() {
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <div className="grid gap-4 lg:grid-cols-7">
               {/* Income Trend Chart */}
-              <Card className="col-span-4">
+              <Card className="lg:col-span-4">
                 <CardHeader>
-                  <CardTitle>Income Trend</CardTitle>
-                  <CardDescription>Income over the last 6 months</CardDescription>
+                  <CardTitle className="text-base sm:text-lg">Income Trend</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">Income over the last 6 months</CardDescription>
                 </CardHeader>
                 <CardContent className="pl-2">
-                  <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                  <div className="h-[200px] sm:h-[300px] flex items-center justify-center text-muted-foreground text-sm">
                     Income Trend Chart Area (Chart Library Integration)
                   </div>
                 </CardContent>
               </Card>
 
               {/* Withdraw Action */}
-              <Card className="col-span-3">
+              <Card className="lg:col-span-3">
                 <CardHeader>
-                  <CardTitle>Quick Withdraw</CardTitle>
-                  <CardDescription>Withdraw balance to bank account</CardDescription>
+                  <CardTitle className="text-base sm:text-lg">Quick Withdraw</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">Withdraw balance to bank account</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">

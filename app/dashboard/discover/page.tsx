@@ -79,16 +79,16 @@ export default function DiscoveryPage() {
   const totalPages = Math.ceil(total / 12) || 1;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Discover Influencers</h1>
-        <p className="text-gray-500 mt-1">Browse and find high-quality influencers for your brand</p>
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Discover Influencers</h1>
+        <p className="text-gray-500 mt-1 text-sm lg:text-base">Browse and find high-quality influencers for your brand</p>
       </div>
 
       {/* Search & Filters */}
-      <div className="flex items-center gap-4">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        <div className="relative flex-1 sm:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
             placeholder="Search influencers..."
@@ -100,7 +100,7 @@ export default function DiscoveryPage() {
         
         <Sheet open={showFilters} onOpenChange={setShowFilters}>
           <SheetTrigger asChild>
-            <Button variant="outline">
+            <Button variant="outline" className="w-full sm:w-auto">
               <Filter className="w-4 h-4 mr-2" />
               Filters
             </Button>
@@ -198,7 +198,7 @@ export default function DiscoveryPage() {
 
       {/* Grid */}
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <Skeleton key={i} className="h-64 w-full" />
           ))}
@@ -225,7 +225,7 @@ export default function DiscoveryPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {influencers.map((influencer: any) => (
             <InfluencerCard key={influencer.id} influencer={influencer} />
           ))}
@@ -275,25 +275,25 @@ function InfluencerCard({ influencer }: { influencer: any }) {
 
   return (
     <Card className="hover:shadow-lg transition-shadow">
-      <CardContent className="p-6">
-        <div className="flex items-start gap-4">
-          <Avatar className="w-16 h-16">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <Avatar className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0">
             <AvatarImage src={influencer.avatarUrl} />
             <AvatarFallback>
               {getInitials(influencer.user?.firstName, influencer.user?.lastName)}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-gray-900 truncate">
+            <h3 className="font-semibold text-gray-900 truncate text-sm sm:text-base">
               {influencer.displayName}
             </h3>
-            <p className="text-sm text-gray-500 truncate">
+            <p className="text-xs sm:text-sm text-gray-500 truncate">
               {influencer.location || 'Location Not Set'}
             </p>
           </div>
         </div>
 
-        <div className="mt-4 space-y-2">
+        <div className="mt-3 sm:mt-4 space-y-2">
           <div className="flex flex-wrap gap-1">
             {influencer.niche?.slice(0, 3).map((n: string) => (
               <Badge key={n} variant="secondary" className="text-xs">
@@ -311,7 +311,7 @@ function InfluencerCard({ influencer }: { influencer: any }) {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 text-xs sm:text-sm">
           <div>
             <p className="text-gray-500">Followers</p>
             <p className="font-semibold">
@@ -327,27 +327,27 @@ function InfluencerCard({ influencer }: { influencer: any }) {
         </div>
 
         {influencer.baseRate && (
-          <div className="mt-4 pt-4 border-t">
-            <p className="text-sm text-gray-500">Base Rate</p>
-            <p className="text-lg font-semibold text-purple-600">
+          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t">
+            <p className="text-xs sm:text-sm text-gray-500">Base Rate</p>
+            <p className="text-base sm:text-lg font-semibold text-purple-600">
               {formatCurrency(influencer.baseRate)}
             </p>
           </div>
         )}
 
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 sm:mt-4 flex gap-2">
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex-1"
+            className="flex-1 text-xs sm:text-sm"
             onClick={handleMessage}
           >
-            <MessageSquare className="w-4 h-4 mr-1" />
+            <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
             Message
           </Button>
           <Button 
             size="sm" 
-            className="flex-1"
+            className="flex-1 text-xs sm:text-sm"
             onClick={handleInvite}
           >
             Invite

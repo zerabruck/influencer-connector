@@ -191,31 +191,31 @@ Thank you for your interest! Please read this brief carefully to ensure high-qua
   const prevStep = () => setStep(step - 1);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 lg:space-y-8">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         <Link href="/dashboard/campaigns">
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-5 h-5" />
+          <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Create Campaign</h1>
-          <p className="text-gray-500 mt-1">Publish a new marketing campaign</p>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Create Campaign</h1>
+          <p className="text-gray-500 mt-1 text-sm lg:text-base">Publish a new marketing campaign</p>
         </div>
       </div>
 
       {/* Progress */}
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-1 sm:gap-2">
         {[1, 2, 3].map((s) => (
           <div key={s} className="flex items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium ${
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-medium text-sm sm:text-base ${
               step >= s ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-500'
             }`}>
               {s}
             </div>
             {s < 3 && (
-              <div className={`w-16 h-1 mx-2 ${step > s ? 'bg-purple-600' : 'bg-gray-200'}`} />
+              <div className={`w-8 sm:w-12 lg:w-16 h-1 mx-1 sm:mx-2 ${step > s ? 'bg-purple-600' : 'bg-gray-200'}`} />
             )}
           </div>
         ))}
@@ -345,7 +345,7 @@ Thank you for your interest! Please read this brief carefully to ensure high-qua
               </div>
 
               {/* Budget */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="budgetMin">Min Budget (USD) *</Label>
                   <Input
@@ -445,7 +445,7 @@ Thank you for your interest! Please read this brief carefully to ensure high-qua
               </div>
 
               {/* Dates */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="startDate">Start Date</Label>
                   <Input
@@ -462,7 +462,7 @@ Thank you for your interest! Please read this brief carefully to ensure high-qua
                     {...register('endDate')}
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 sm:col-span-2 lg:col-span-1">
                   <Label htmlFor="applicationDeadline">Application Deadline</Label>
                   <Input
                     id="applicationDeadline"

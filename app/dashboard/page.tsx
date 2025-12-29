@@ -28,41 +28,41 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <StatCard 
           title="Campaigns" 
           total={stats.campaigns.total}
           active={stats.campaigns.active}
-          icon={<Megaphone className="w-6 h-6 text-purple-600" />}
+          icon={<Megaphone className="w-5 h-5 lg:w-6 lg:h-6 text-purple-600" />}
           href="/dashboard/campaigns"
         />
         <StatCard 
           title="Applications" 
           total={stats.applications.total}
           pending={stats.applications.pending}
-          icon={<Users className="w-6 h-6 text-blue-600" />}
+          icon={<Users className="w-5 h-5 lg:w-6 lg:h-6 text-blue-600" />}
           href="/dashboard/applications"
         />
         <StatCard 
           title="Collaborations" 
           total={stats.collaborations.total}
           active={stats.collaborations.active}
-          icon={<TrendingUp className="w-6 h-6 text-green-600" />}
+          icon={<TrendingUp className="w-5 h-5 lg:w-6 lg:h-6 text-green-600" />}
           href="/dashboard/collaborations"
         />
         <StatCard 
           title="Earnings" 
           total={stats.earnings.total}
           thisMonth={stats.earnings.thisMonth}
-          icon={<DollarSign className="w-6 h-6 text-yellow-600" />}
+          icon={<DollarSign className="w-5 h-5 lg:w-6 lg:h-6 text-yellow-600" />}
           href="/dashboard/payments"
           isCurrency
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
         {/* Recent Activity */}
         <Card>
           <CardHeader>
@@ -134,42 +134,42 @@ export default function DashboardPage() {
 
       {/* Recommended Content */}
       <Card>
-        <CardHeader>
-          <CardTitle>Recommended Campaigns</CardTitle>
-          <CardDescription>Latest opportunities for you</CardDescription>
+        <CardHeader className="pb-3 sm:pb-6">
+          <CardTitle className="text-base sm:text-lg">Recommended Campaigns</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">Latest opportunities for you</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {[
               { title: 'Looking for beauty influencers', budget: '$2,000-5,000', platform: 'Instagram', tags: ['Beauty', 'Skincare'] },
               { title: 'Tech Review Collab', budget: '$1,500-3,000', platform: 'YouTube', tags: ['Tech', 'Review'] },
               { title: 'Fashion OOTD Collab', budget: '$3,000-8,000', platform: 'TikTok', tags: ['Fashion', 'OOTD'] },
             ].map((campaign, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition">
-                <div>
-                  <h4 className="font-medium text-gray-900">{campaign.title}</h4>
-                  <div className="flex items-center space-x-4 mt-1 text-sm text-gray-500">
+              <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition gap-3">
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-medium text-gray-900 text-sm sm:text-base truncate">{campaign.title}</h4>
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-1 text-xs sm:text-sm text-gray-500">
                     <span>{campaign.budget}</span>
-                    <span>{campaign.platform}</span>
-                    <div className="flex space-x-1">
+                    <span className="hidden sm:inline">{campaign.platform}</span>
+                    <div className="flex gap-1">
                       {campaign.tags.map((tag, i) => (
-                        <span key={i} className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">
+                        <span key={i} className="bg-purple-100 text-purple-700 px-1.5 sm:px-2 py-0.5 rounded text-xs">
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
-                  <Link href={`/dashboard/campaigns/${index + 1}`}>
-                  <Button variant="outline" size="sm">
-                    View Details <ArrowRight className="ml-2 w-4 h-4" />
+                <Link href={`/dashboard/campaigns/${index + 1}`} className="flex-shrink-0">
+                  <Button variant="outline" size="sm" className="w-full sm:w-auto text-xs sm:text-sm">
+                    View <ArrowRight className="ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </Link>
               </div>
             ))}
           </div>
           <Link href="/dashboard/discover">
-            <Button variant="ghost" className="w-full mt-4">
+            <Button variant="ghost" className="w-full mt-3 sm:mt-4 text-sm">
               View More Campaigns <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
@@ -200,27 +200,27 @@ function StatCard({
 }) {
   return (
     <Link href={href}>
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">{title}</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">
+      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+        <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6 pb-3 sm:pb-6">
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm text-gray-500 truncate">{title}</p>
+              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1">
                 {isCurrency ? `$${total.toLocaleString()}` : total}
               </p>
-              <div className="flex items-center space-x-2 mt-2 text-sm text-gray-500">
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500">
                 {active !== undefined && (
-                  <span className="text-green-600">{active} In Progress</span>
+                  <span className="text-green-600">{active} Active</span>
                 )}
                 {pending !== undefined && (
                   <span className="text-yellow-600">{pending} Pending</span>
                 )}
                 {thisMonth !== undefined && (
-                  <span>This Month {isCurrency ? `$${thisMonth.toLocaleString()}` : thisMonth}</span>
+                  <span className="truncate">+{isCurrency ? `$${thisMonth.toLocaleString()}` : thisMonth}</span>
                 )}
               </div>
             </div>
-            <div className="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-50 rounded-full flex items-center justify-center flex-shrink-0">
               {icon}
             </div>
           </div>
@@ -257,12 +257,12 @@ function QuickAction({
 }) {
   return (
     <Link href={href}>
-      <div className="p-4 border rounded-lg hover:bg-gray-50 transition cursor-pointer text-center">
-        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+      <div className="p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition cursor-pointer text-center h-full">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
           {icon}
         </div>
-        <h4 className="font-medium text-gray-900">{title}</h4>
-        <p className="text-sm text-gray-500 mt-1">{description}</p>
+        <h4 className="font-medium text-gray-900 text-sm sm:text-base">{title}</h4>
+        <p className="text-xs sm:text-sm text-gray-500 mt-1 hidden sm:block">{description}</p>
       </div>
     </Link>
   );

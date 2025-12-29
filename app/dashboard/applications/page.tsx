@@ -67,16 +67,16 @@ export default function ApplicationsPage() {
   const filteredReceived = filterApplications(receivedApplications);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Applications</h1>
-        <p className="text-gray-500 mt-1">Manage your sent and received applications</p>
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Applications</h1>
+        <p className="text-gray-500 mt-1 text-sm lg:text-base">Manage your sent and received applications</p>
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-4">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        <div className="relative flex-1 sm:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
             placeholder="Search campaigns..."
@@ -86,7 +86,7 @@ export default function ApplicationsPage() {
           />
         </div>
         <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-40">
+          <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -185,15 +185,15 @@ function ApplicationCard({
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'PENDING':
-        return <Clock className="w-5 h-5 text-yellow-500" />;
+        return <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />;
       case 'ACCEPTED':
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />;
       case 'REJECTED':
-        return <XCircle className="w-5 h-5 text-red-500" />;
+        return <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />;
       case 'WITHDRAWN':
-        return <AlertCircle className="w-5 h-5 text-gray-500" />;
+        return <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />;
       default:
-        return <Clock className="w-5 h-5 text-gray-500" />;
+        return <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />;
     }
   };
 
@@ -203,29 +203,29 @@ function ApplicationCard({
 
   return (
     <Card>
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-4">
-            <Avatar className="w-12 h-12">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+          <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+            <Avatar className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
               <AvatarImage src={otherParty?.avatarUrl || otherParty?.user?.avatarUrl} />
-              <AvatarFallback>
+              <AvatarFallback className="text-xs sm:text-sm">
                 {type === 'received' 
                   ? getInitials(application.influencer?.displayName)
                   : getInitials(otherParty?.companyName)
                 }
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1">
-              <div className="flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 {type === 'received' ? (
                   <Link href={`/dashboard/influencers/${application.influencer?.id}`}>
-                    <h4 className="font-semibold text-gray-900 hover:text-purple-600">
+                    <h4 className="font-semibold text-gray-900 hover:text-purple-600 text-sm sm:text-base truncate">
                       {application.influencer?.displayName}
                     </h4>
                   </Link>
                 ) : (
                   <Link href={`/dashboard/campaigns/${application.campaign?.id}`}>
-                    <h4 className="font-semibold text-gray-900 hover:text-purple-600">
+                    <h4 className="font-semibold text-gray-900 hover:text-purple-600 text-sm sm:text-base truncate">
                       {application.campaign?.title}
                     </h4>
                   </Link>
@@ -236,19 +236,19 @@ function ApplicationCard({
               </div>
               
               {type === 'received' ? (
-                <div className="mt-2 text-sm text-gray-500">
-                  <p>Niches: {application.influencer?.niche?.join(', ')}</p>
-                  <p>Platforms: {application.influencer?.platforms?.join(', ')}</p>
+                <div className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500">
+                  <p className="truncate">Niches: {application.influencer?.niche?.join(', ')}</p>
+                  <p className="truncate">Platforms: {application.influencer?.platforms?.join(', ')}</p>
                 </div>
               ) : (
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500 truncate">
                   {application.campaign?.brand?.companyName}
                 </p>
               )}
 
-              <p className="mt-3 text-gray-700">{application.pitch}</p>
+              <p className="mt-2 sm:mt-3 text-gray-700 text-sm line-clamp-2">{application.pitch}</p>
 
-              <div className="mt-3 flex items-center gap-4 text-sm text-gray-500">
+              <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
                 {application.proposedRate && (
                   <span>Rate: ${(application.proposedRate / 100).toFixed(2)}</span>
                 )}
@@ -256,8 +256,8 @@ function ApplicationCard({
               </div>
 
               {application.reviewNotes && (
-                <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600">
+                <div className="mt-2 sm:mt-3 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     <span className="font-medium">Review Notes: </span>
                     {application.reviewNotes}
                   </p>
@@ -266,7 +266,7 @@ function ApplicationCard({
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0 self-start lg:self-center">
             {getStatusIcon(application.status)}
             
             {type === 'sent' && application.status === 'PENDING' && (
@@ -275,6 +275,7 @@ function ApplicationCard({
                 size="sm"
                 onClick={onWithdraw}
                 disabled={isWithdrawing}
+                className="text-xs sm:text-sm"
               >
                 {isWithdrawing ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Withdraw'}
               </Button>
@@ -282,14 +283,14 @@ function ApplicationCard({
 
             {application.status === 'ACCEPTED' && (
               <Link href={`/dashboard/collaborations/${application.id}`}>
-                <Button size="sm">View Collaboration</Button>
+                <Button size="sm" className="text-xs sm:text-sm">View Collaboration</Button>
               </Link>
             )}
 
             {type === 'received' && application.status === 'PENDING' && (
               <div className="flex gap-2">
-                <Button variant="outline" size="sm">Reject</Button>
-                <Button size="sm">Accept</Button>
+                <Button variant="outline" size="sm" className="text-xs sm:text-sm">Reject</Button>
+                <Button size="sm" className="text-xs sm:text-sm">Accept</Button>
               </div>
             )}
           </div>

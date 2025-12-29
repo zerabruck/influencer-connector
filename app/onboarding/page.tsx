@@ -138,30 +138,30 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Logo */}
-        <div className="flex items-center space-x-2 mb-12">
-          <Sparkles className="w-8 h-8 text-purple-600" />
-          <span className="text-xl font-bold text-gray-900">InfluencerConnect</span>
+        <div className="flex items-center space-x-2 mb-8 sm:mb-12">
+          <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
+          <span className="text-lg sm:text-xl font-bold text-gray-900">InfluencerConnect</span>
         </div>
 
         {/* Progress */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
           <div className="flex items-center justify-between">
             {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium ${
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-medium text-sm sm:text-base ${
                   step >= s ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-500'
                 }`}>
-                  {step > s ? <Check className="w-5 h-5" /> : s}
+                  {step > s ? <Check className="w-4 h-4 sm:w-5 sm:h-5" /> : s}
                 </div>
                 {s < 3 && (
-                  <div className={`w-20 h-1 mx-2 ${step > s ? 'bg-purple-600' : 'bg-gray-200'}`} />
+                  <div className={`w-12 sm:w-20 h-1 mx-1 sm:mx-2 ${step > s ? 'bg-purple-600' : 'bg-gray-200'}`} />
                 )}
               </div>
             ))}
           </div>
-          <div className="flex justify-between mt-2 text-sm text-gray-500">
+          <div className="flex justify-between mt-2 text-xs sm:text-sm text-gray-500">
             <span>Select Role</span>
             <span>Profile Details</span>
             <span>Complete</span>
@@ -171,28 +171,28 @@ export default function OnboardingPage() {
         {/* Step 1: Role Selection */}
         {step === 1 && (
           <Card className="max-w-2xl mx-auto">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Welcome to InfluencerConnect!</CardTitle>
-              <CardDescription>Please select your role to customize your experience</CardDescription>
+            <CardHeader className="text-center pb-4 sm:pb-6">
+              <CardTitle className="text-xl sm:text-2xl">Welcome to InfluencerConnect!</CardTitle>
+              <CardDescription className="text-sm">Please select your role to customize your experience</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={roleForm.handleSubmit(handleRoleSubmit)}>
                 <RadioGroup
                   value={roleForm.watch('role')}
                   onValueChange={(value) => roleForm.setValue('role', value as 'BRAND' | 'INFLUENCER')}
-                  className="grid md:grid-cols-2 gap-4 mb-6"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6"
                 >
                   <label className="cursor-pointer">
                     <input type="radio" value="BRAND" className="sr-only" />
-                    <Card className={`p-6 transition-all hover:shadow-md ${
+                    <Card className={`p-4 sm:p-6 transition-all hover:shadow-md ${
                       roleForm.watch('role') === 'BRAND' ? 'ring-2 ring-purple-600 bg-purple-50' : ''
                     }`}>
                       <div className="flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                          <Building2 className="w-8 h-8 text-blue-600" />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                          <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
                         </div>
-                        <h3 className="font-semibold text-lg mb-2">Brand</h3>
-                        <p className="text-sm text-gray-500">
+                        <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Brand</h3>
+                        <p className="text-xs sm:text-sm text-gray-500">
                           Looking for influencers to promote products and build brand image
                         </p>
                       </div>
@@ -201,15 +201,15 @@ export default function OnboardingPage() {
 
                   <label className="cursor-pointer">
                     <input type="radio" value="INFLUENCER" className="sr-only" />
-                    <Card className={`p-6 transition-all hover:shadow-md ${
+                    <Card className={`p-4 sm:p-6 transition-all hover:shadow-md ${
                       roleForm.watch('role') === 'INFLUENCER' ? 'ring-2 ring-purple-600 bg-purple-50' : ''
                     }`}>
                       <div className="flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                          <User className="w-8 h-8 text-green-600" />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                          <User className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                         </div>
-                        <h3 className="font-semibold text-lg mb-2">Influencer</h3>
-                        <p className="text-sm text-gray-500">
+                        <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Influencer</h3>
+                        <p className="text-xs sm:text-sm text-gray-500">
                           Discover business opportunities and monetize content
                         </p>
                       </div>
@@ -370,7 +370,7 @@ export default function OnboardingPage() {
 
                 <div className="space-y-2">
                   <Label>Active Platforms *</Label>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mt-2">
                     {platforms.map((platform) => (
                       <button
                         key={platform.value}
@@ -383,14 +383,14 @@ export default function OnboardingPage() {
                             influencerForm.setValue('platforms', [...current, platform.value]);
                           }
                         }}
-                        className={`p-3 rounded-lg border text-left transition-colors ${
+                        className={`p-2 sm:p-3 rounded-lg border text-left transition-colors ${
                           influencerForm.watch('platforms').includes(platform.value)
                             ? 'border-purple-600 bg-purple-50'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
-                        <span className="text-lg mr-2">{platform.icon}</span>
-                        <span className="text-sm">{platform.label}</span>
+                        <span className="text-base sm:text-lg mr-1 sm:mr-2">{platform.icon}</span>
+                        <span className="text-xs sm:text-sm">{platform.label}</span>
                       </button>
                     ))}
                   </div>

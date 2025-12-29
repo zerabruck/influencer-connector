@@ -215,60 +215,60 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
         {/* Page Title */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Account Settings</h1>
-          <p className="text-muted-foreground">Manage your profile, notification preferences, and account security</p>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight">Account Settings</h1>
+          <p className="text-muted-foreground text-sm lg:text-base">Manage your profile, notification preferences, and account security</p>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="profile">
-              <User className="h-4 w-4 mr-2" />
-              Profile
+          <TabsList className="w-full sm:w-auto flex flex-wrap">
+            <TabsTrigger value="profile" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <User className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Profile</span>
             </TabsTrigger>
-            <TabsTrigger value="notifications">
-              <Bell className="h-4 w-4 mr-2" />
-              Notifications
+            <TabsTrigger value="notifications" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Bell className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Notifications</span>
             </TabsTrigger>
-            <TabsTrigger value="security">
-              <Shield className="h-4 w-4 mr-2" />
-              Security
+            <TabsTrigger value="security" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Shield className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Security</span>
             </TabsTrigger>
-            <TabsTrigger value="appearance">
-              <Palette className="h-4 w-4 mr-2" />
-              Appearance
+            <TabsTrigger value="appearance" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Palette className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Appearance</span>
             </TabsTrigger>
           </TabsList>
 
           {/* Profile Tab */}
           <TabsContent value="profile" className="space-y-4">
-            <div className="grid gap-6 md:grid-cols-[1fr_2fr]">
+            <div className="grid gap-4 lg:gap-6 lg:grid-cols-[1fr_2fr]">
               {/* Avatar Card */}
               <Card>
-                <CardHeader>
-                  <CardTitle>Avatar</CardTitle>
-                  <CardDescription>Update your profile picture</CardDescription>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-base sm:text-lg">Avatar</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">Update your profile picture</CardDescription>
                 </CardHeader>
-                <CardContent className="flex flex-col items-center space-y-4">
+                <CardContent className="flex flex-col items-center space-y-3 sm:space-y-4">
                   <div className="relative">
-                    <Avatar className="h-32 w-32">
+                    <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
                       <AvatarImage src={user?.avatarUrl} alt={user?.firstName} />
-                      <AvatarFallback className="text-2xl">
+                      <AvatarFallback className="text-xl sm:text-2xl">
                         {user?.firstName?.[0]}{user?.lastName?.[0]}
                       </AvatarFallback>
                     </Avatar>
-                    <Button size="icon" className="absolute bottom-0 right-0 rounded-full">
-                      <Camera className="h-4 w-4" />
+                    <Button size="icon" className="absolute bottom-0 right-0 rounded-full h-8 w-8 sm:h-10 sm:w-10">
+                      <Camera className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </Button>
                   </div>
                   <div className="text-center">
-                    <p className="font-medium">{user?.firstName} {user?.lastName}</p>
-                    <p className="text-sm text-muted-foreground">{user?.email}</p>
+                    <p className="font-medium text-sm sm:text-base">{user?.firstName} {user?.lastName}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate max-w-[200px]">{user?.email}</p>
                   </div>
-                  <Button variant="outline" size="sm">
-                    <CameraOff className="h-4 w-4 mr-2" />
+                  <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                    <CameraOff className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
                     Remove Avatar
                   </Button>
                 </CardContent>

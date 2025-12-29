@@ -80,26 +80,26 @@ export default function CampaignDetailPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
         <Link href="/dashboard/campaigns">
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-5 h-5" />
+          <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </Link>
-        <div className="flex-1">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-gray-900">{campaign.title}</h1>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">{campaign.title}</h1>
             <Badge className={getStatusColor(campaign.status)}>
               {getStatusLabel(campaign.status)}
             </Badge>
           </div>
-          <p className="text-gray-500 mt-1">Created at {formatDate(campaign.createdAt)}</p>
+          <p className="text-gray-500 mt-1 text-xs sm:text-sm">Created at {formatDate(campaign.createdAt)}</p>
         </div>
         {campaign.status === 'DRAFT' && (
           <Link href={`/dashboard/campaigns/${campaignId}/edit`}>
-            <Button>
+            <Button className="w-full sm:w-auto">
               <Edit className="w-4 h-4 mr-2" />
               Edit
             </Button>
@@ -108,16 +108,16 @@ export default function CampaignDetailPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-green-600" />
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Budget Range</p>
-                <p className="text-lg font-semibold">
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-gray-500">Budget Range</p>
+                <p className="text-sm sm:text-lg font-semibold truncate">
                   {formatCurrency(campaign.budgetMin)} - {formatCurrency(campaign.budgetMax)}
                 </p>
               </div>
@@ -125,42 +125,42 @@ export default function CampaignDetailPage() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <Users className="w-5 h-5 text-blue-600" />
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Applicants</p>
-                <p className="text-lg font-semibold">{applications.length}</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-gray-500">Applicants</p>
+                <p className="text-sm sm:text-lg font-semibold">{applications.length}</p>
               </div>
             </div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
                 {campaign.platforms?.map((p: string) => (
-                  <span key={p} className="text-lg">{getPlatformIcon(p)}</span>
+                  <span key={p} className="text-base sm:text-lg">{getPlatformIcon(p)}</span>
                 ))}
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Target Platforms</p>
-                <p className="text-lg font-semibold">{campaign.platforms?.length || 0}</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-gray-500">Target Platforms</p>
+                <p className="text-sm sm:text-lg font-semibold">{campaign.platforms?.length || 0}</p>
               </div>
             </div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
-                <Clock className="w-5 h-5 text-yellow-600" />
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Niches</p>
-                <p className="text-lg font-semibold">{campaign.targetNiches?.length || 0}</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-gray-500">Niches</p>
+                <p className="text-sm sm:text-lg font-semibold">{campaign.targetNiches?.length || 0}</p>
               </div>
             </div>
           </CardContent>
@@ -177,37 +177,37 @@ export default function CampaignDetailPage() {
           <TabsTrigger value="deliverables">Deliverables</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="mt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 space-y-6">
+        <TabsContent value="overview" className="mt-4 sm:mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Description</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-base sm:text-lg">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 whitespace-pre-wrap">{campaign.description}</p>
+                  <p className="text-gray-700 whitespace-pre-wrap text-sm sm:text-base">{campaign.description}</p>
                 </CardContent>
               </Card>
 
               {campaign.requirements && (
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Requirements</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-base sm:text-lg">Requirements</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 whitespace-pre-wrap">{campaign.requirements}</p>
+                    <p className="text-gray-700 whitespace-pre-wrap text-sm sm:text-base">{campaign.requirements}</p>
                   </CardContent>
                 </Card>
               )}
 
               {campaign.brief && (
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Brief Details</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-base sm:text-lg">Brief Details</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="prose max-w-none">
-                      <pre className="whitespace-pre-wrap text-sm text-gray-700 font-sans">
+                      <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-700 font-sans overflow-x-auto">
                         {campaign.brief}
                       </pre>
                     </div>
@@ -216,60 +216,60 @@ export default function CampaignDetailPage() {
               )}
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Campaign Info</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-base sm:text-lg">Campaign Info</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-3 sm:space-y-4">
                   <div>
-                    <p className="text-sm text-gray-500">Target Platforms</p>
+                    <p className="text-xs sm:text-sm text-gray-500">Target Platforms</p>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {campaign.platforms?.map((p: string) => (
-                        <Badge key={p} variant="outline">
+                        <Badge key={p} variant="outline" className="text-xs">
                           {getPlatformIcon(p)} {p}
                         </Badge>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Target Niches</p>
+                    <p className="text-xs sm:text-sm text-gray-500">Target Niches</p>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {campaign.targetNiches?.map((n: string) => (
-                        <Badge key={n} variant="outline">{n}</Badge>
+                        <Badge key={n} variant="outline" className="text-xs">{n}</Badge>
                       ))}
                     </div>
                   </div>
                   {campaign.targetLocations?.length > 0 && (
                     <div>
-                      <p className="text-sm text-gray-500">Target Locations</p>
-                      <p className="mt-1">{campaign.targetLocations.join(', ')}</p>
+                      <p className="text-xs sm:text-sm text-gray-500">Target Locations</p>
+                      <p className="mt-1 text-sm">{campaign.targetLocations.join(', ')}</p>
                     </div>
                   )}
                   {campaign.applicationDeadline && (
                     <div>
-                      <p className="text-sm text-gray-500">Deadline</p>
-                      <p className="mt-1">{formatDate(campaign.applicationDeadline)}</p>
+                      <p className="text-xs sm:text-sm text-gray-500">Deadline</p>
+                      <p className="mt-1 text-sm">{formatDate(campaign.applicationDeadline)}</p>
                     </div>
                   )}
                 </CardContent>
               </Card>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Brand Info</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-base sm:text-lg">Brand Info</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-3">
-                    <Avatar>
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Avatar className="h-9 w-9 sm:h-10 sm:w-10">
                       <AvatarImage src={campaign.brand?.user?.avatarUrl} />
-                      <AvatarFallback>
+                      <AvatarFallback className="text-xs sm:text-sm">
                         {campaign.brand?.companyName?.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
-                    <div>
-                      <p className="font-medium">{campaign.brand?.companyName}</p>
-                      <p className="text-sm text-gray-500">{campaign.brand?.industry}</p>
+                    <div className="min-w-0">
+                      <p className="font-medium text-sm sm:text-base truncate">{campaign.brand?.companyName}</p>
+                      <p className="text-xs sm:text-sm text-gray-500 truncate">{campaign.brand?.industry}</p>
                     </div>
                   </div>
                 </CardContent>

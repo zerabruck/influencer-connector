@@ -97,44 +97,44 @@ export default function CollaborationsPage() {
   const filteredCollab = filterCollaborations(collaborations);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Collaborations</h1>
-        <p className="text-gray-500 mt-1">Manage your collaborations</p>
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Collaborations</h1>
+        <p className="text-gray-500 mt-1 text-sm lg:text-base">Manage your collaborations</p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold">{(stats as any)?.totalCollaborations || 0}</div>
-            <p className="text-sm text-gray-500">Total Collaborations</p>
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold">{(stats as any)?.totalCollaborations || 0}</div>
+            <p className="text-xs sm:text-sm text-gray-500">Total Collaborations</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-blue-600">{(stats as any)?.activeCollaborations || 0}</div>
-            <p className="text-sm text-gray-500">In Progress</p>
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">{(stats as any)?.activeCollaborations || 0}</div>
+            <p className="text-xs sm:text-sm text-gray-500">In Progress</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-purple-600">{(stats as any)?.pendingApplications || 0}</div>
-            <p className="text-sm text-gray-500">Pending Review</p>
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold text-purple-600">{(stats as any)?.pendingApplications || 0}</div>
+            <p className="text-xs sm:text-sm text-gray-500">Pending Review</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-green-600">{(stats as any)?.completedCollaborations || 0}</div>
-            <p className="text-sm text-gray-500">Completed</p>
+          <CardContent className="pt-4 sm:pt-6 px-3 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold text-green-600">{(stats as any)?.completedCollaborations || 0}</div>
+            <p className="text-xs sm:text-sm text-gray-500">Completed</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-4">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        <div className="relative flex-1 sm:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
             placeholder="Search collaborations..."
@@ -144,7 +144,7 @@ export default function CollaborationsPage() {
           />
         </div>
         <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-40">
+          <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -255,18 +255,18 @@ function CollaborationCard({
 }) {
   return (
     <Card>
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-4">
-            <Avatar className="w-12 h-12">
-              <AvatarFallback>
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+          <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+            <Avatar className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
+              <AvatarFallback className="text-xs sm:text-sm">
                 {getInitials(collaboration.campaign?.title)}
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1">
-              <div className="flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <Link href={`/dashboard/campaigns/${collaboration.campaign?.id}`}>
-                  <h4 className="font-semibold text-gray-900 hover:text-purple-600">
+                  <h4 className="font-semibold text-gray-900 hover:text-purple-600 text-sm sm:text-base truncate">
                     {collaboration.campaign?.title}
                   </h4>
                 </Link>
@@ -275,20 +275,20 @@ function CollaborationCard({
                 </Badge>
               </div>
               
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">
                 Amount: {formatCurrency(collaboration.agreedRate)}
               </p>
 
               {collaboration.feedback && (
-                <div className="mt-3 p-3 bg-yellow-50 rounded-lg">
-                  <p className="text-sm text-yellow-800">
+                <div className="mt-2 sm:mt-3 p-2 sm:p-3 bg-yellow-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-yellow-800">
                     <span className="font-medium">Feedback: </span>
                     {collaboration.feedback}
                   </p>
                 </div>
               )}
 
-              <div className="mt-3 flex items-center gap-4 text-sm text-gray-500">
+              <div className="mt-2 sm:mt-3 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
                 <span>Created at {formatRelativeTime(collaboration.createdAt)}</span>
                 {collaboration.submittedAt && (
                   <span>Submitted at {formatRelativeTime(collaboration.submittedAt)}</span>
@@ -297,17 +297,17 @@ function CollaborationCard({
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
             <Link href={`/dashboard/messages`}>
-              <Button variant="outline" size="sm">
-                <MessageSquare className="w-4 h-4 mr-1" />
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                 Message
               </Button>
             </Link>
 
             {collaboration.status === 'ACTIVE' && (
-              <Button size="sm" onClick={onSubmit} disabled={isSubmitting}>
-                <Upload className="w-4 h-4 mr-1" />
+              <Button size="sm" onClick={onSubmit} disabled={isSubmitting} className="text-xs sm:text-sm">
+                <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                 Submit
               </Button>
             )}
@@ -319,11 +319,12 @@ function CollaborationCard({
                   size="sm" 
                   onClick={onReject}
                   disabled={isRejecting}
+                  className="text-xs sm:text-sm"
                 >
                   Reject
                 </Button>
-                <Button size="sm" onClick={onApprove} disabled={isApproving}>
-                  <CheckCircle className="w-4 h-4 mr-1" />
+                <Button size="sm" onClick={onApprove} disabled={isApproving} className="text-xs sm:text-sm">
+                  <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                   Approve
                 </Button>
               </>
@@ -331,8 +332,8 @@ function CollaborationCard({
 
             {collaboration.status === 'APPROVED' && (
               <Link href={`/dashboard/payments`}>
-                <Button size="sm">
-                  <DollarSign className="w-4 h-4 mr-1" />
+                <Button size="sm" className="text-xs sm:text-sm">
+                  <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                   View Payment
                 </Button>
               </Link>

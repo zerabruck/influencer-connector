@@ -79,15 +79,15 @@ export default function CampaignsPage() {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Campaigns</h1>
-          <p className="text-gray-500 mt-1">Manage your marketing campaigns</p>
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Campaigns</h1>
+          <p className="text-gray-500 mt-1 text-sm lg:text-base">Manage your marketing campaigns</p>
         </div>
         <Link href="/dashboard/campaigns/create">
-          <Button>
+          <Button className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
             Create Campaign
           </Button>
@@ -95,8 +95,8 @@ export default function CampaignsPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-4">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        <div className="relative flex-1 sm:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
             placeholder="Search campaigns..."
@@ -106,7 +106,7 @@ export default function CampaignsPage() {
           />
         </div>
         <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-40">
+          <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -189,28 +189,28 @@ function CampaignCard({ campaign, onDelete, isDeleting }: {
 }) {
   return (
     <Card className="hover:shadow-md transition-shadow">
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">{campaign.title}</h3>
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">{campaign.title}</h3>
               <Badge className={getStatusColor(campaign.status)}>
                 {getStatusLabel(campaign.status)}
               </Badge>
             </div>
-            <p className="text-gray-600 mb-4 line-clamp-2">{campaign.description}</p>
+            <p className="text-gray-600 mb-3 sm:mb-4 line-clamp-2 text-sm sm:text-base">{campaign.description}</p>
             
-            <div className="flex items-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500">
               <div className="flex items-center gap-1">
-                <DollarSign className="w-4 h-4" />
+                <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{formatCurrency(campaign.budgetMin)} - {formatCurrency(campaign.budgetMax)}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{formatDate(campaign.createdAt)}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{campaign._count?.applications || 0} Applications</span>
               </div>
               <div className="flex items-center gap-1">
@@ -221,17 +221,17 @@ function CampaignCard({ campaign, onDelete, isDeleting }: {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <Link href={`/dashboard/campaigns/${campaign.id}`}>
-              <Button variant="outline" size="sm">
-                <Eye className="w-4 h-4 mr-1" />
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                 View
               </Button>
             </Link>
             {campaign.status === 'DRAFT' && (
               <Link href={`/dashboard/campaigns/${campaign.id}/edit`}>
-                <Button variant="outline" size="sm">
-                  <Edit className="w-4 h-4 mr-1" />
+                <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                  <Edit className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                   Edit
                 </Button>
               </Link>
@@ -259,31 +259,31 @@ function CampaignCard({ campaign, onDelete, isDeleting }: {
 function PublicCampaignCard({ campaign }: { campaign: any }) {
   return (
     <Card className="hover:shadow-md transition-shadow cursor-pointer">
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">{campaign.title}</h3>
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900">{campaign.title}</h3>
               <Badge className={getStatusColor(campaign.status)}>
                 {getStatusLabel(campaign.status)}
               </Badge>
             </div>
-            <p className="text-gray-600 mb-4 line-clamp-2">{campaign.description}</p>
+            <p className="text-gray-600 mb-3 sm:mb-4 line-clamp-2 text-sm sm:text-base">{campaign.description}</p>
             
-            <div className="flex items-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500">
               <div className="flex items-center gap-1">
-                <DollarSign className="w-4 h-4" />
+                <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{formatCurrency(campaign.budgetMin)} - {formatCurrency(campaign.budgetMax)}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{campaign._count?.applications || 0} Applications</span>
               </div>
             </div>
           </div>
 
-          <Link href={`/dashboard/campaigns/${campaign.id}`}>
-            <Button size="sm">View Details</Button>
+          <Link href={`/dashboard/campaigns/${campaign.id}`} className="flex-shrink-0">
+            <Button size="sm" className="w-full sm:w-auto">View Details</Button>
           </Link>
         </div>
       </CardContent>
