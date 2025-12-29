@@ -4,7 +4,7 @@ import { AuthProvider } from "@/context/auth-context";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryProvider } from "@/components/providers/query-provider";
 import "./globals.css";
-
+import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ export default function RootLayout({
         <AuthProvider>
           <QueryProvider>
             {children}
+            <Analytics />
             <Toaster />
           </QueryProvider>
         </AuthProvider>
